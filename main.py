@@ -1,4 +1,5 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 
 import numpy as np
 import sklearn as skl
@@ -8,6 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 
 from sklearn.model_selection import train_test_split
+from sklearn.decomposition import PCA
 
 from sklearn.metrics import accuracy_score
 
@@ -85,6 +87,23 @@ acc = accuracy_score(Y_test, y_pred)
 
 st.write("Classifier : ",calssifier)
 st.write("Accuracy = ",acc)
+
+
+
+
+pca = PCA(2)
+x_projected = pca.fit_transform(x)
+
+x1 = x_projected[:, 0]
+x2 = x_projected[:, 1]
+
+fig = plt.figure()
+plt.scatter(x1,x2, c=y, alpha=0.8, cmap="viridis")
+plt.xlabel("Principal component 1")
+plt.ylabel("Principal component 2")
+plt.colorbar()
+
+st.pyplot(fig)
 
 
 
