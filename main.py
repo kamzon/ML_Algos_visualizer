@@ -4,6 +4,13 @@ import numpy as np
 import sklearn as skl
 from sklearn import datasets 
 
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import accuracy_score
+
 
 st.title("Machine learning Algorithms visualizer")
 
@@ -54,7 +61,32 @@ def add_parametrs(clsfier):
 pram = add_parametrs(calssifier)
 
 
+def get_classifier(clsf_name, parms):
+    
+    if(clsf_name == "KNN"):
+        clf = KNeighborsClassifier(n_neighbors=parms['K'])
         
+
+    if(clsf_name == "SVM"):
+        clf = SVC(C=parms['C'])
+        
+
+    return clf
+
+clf = get_classifier(calssifier, pram)
+
+
+X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=0.25, random_state=1234)
+
+clf.fit(X_train,Y_train)
+y_pred = clf.predict(X_test)
+
+acc = accuracy_score(Y_test, y_pred)
+
+st.write("Classifier : ",calssifier)
+st.write("Accuracy = ",acc)
+
+
 
     
 
