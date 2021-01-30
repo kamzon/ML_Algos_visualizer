@@ -4,4 +4,4 @@
 
 pip install --upgrade streamlit opencv-python matplotlib numpy 
 
-streamlit run 
+streamlit run https://github.com/kamzon/ML_Algos_visualizer/blob/main/main.py
